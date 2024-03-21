@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="卒業" />
+    <meta property="og:description" content="あとがき" />
+    <title>あとがき</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .copyable {
+            background: #f3f4f6;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            position: relative;
+        }
+        .copyable button {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffeeba;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background: #e2e8f0;
+            border-radius: 9999px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 0.5rem;
+            color: #1a202c;
+        }
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .share-button {
+            background: #edf2f7;
+            color: #1a202c;
+            padding: 8px;
+            margin: 0 4px;
+            border-radius: 9999px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .share-button i {
+            margin-right: 8px;
+        }
+        @media (max-width: 768px) {
+            .copyable button {
+                position: static;
+                margin-top: 10px;
+            }
+            .copyable pre {
+                overflow-x: auto;
+            }
+        }
+        .image-container {
+    margin-top: 20px;
+    text-align: center;
+    max-width: 300px;
+}
+
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.home-button {
+    background: #edf2f7;
+    color: #1a202c;
+    padding: 8px;
+    margin: 0 4px;
+    border-radius: 9999px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.youtube-video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.youtube-video-container iframe {
+    width: 560px; /* 動画の幅を指定 */
+    height: 315px; /* 動画の高さを指定 */
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* レスポンシブデザインのためのメディアクエリ */
+@media (max-width: 768px) {
+    .youtube-video-container iframe {
+        width: 100%; /* 画面の幅に合わせて調整 */
+        height: auto; /* アスペクト比を保持するために自動調整 */
+    }
+}
+
+@media (max-width: 768px) {
+}
+    </style>
+</head>
+<body class="bg-blue-50">
+    <div class="max-w-4xl mx-auto my-12 bg-white p-8 rounded-lg shadow">
+        <header class="mb-12 text-center">
+            <h1 class="text-4xl font-bold text-gray-800">あとがき</h1><br>
+            <p class="text-md text-gray-600">2024/3/20<br>ポエムと技術スタックについて</p>
+        </header>
+
+
+
+        <article class="mb-8">
+            
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">ご卒業おめでとうございます</h2><br>
+                        
+            <p class="text-gray-700 mb-4">まずは皆さんご卒業おめでとうございます。個人的には長い六年間でした。<br>くそポエムをつらつら書いてもいいのですが書くのは別のページにしたいと思います</p>
+            <br><h2 class="text-3xl font-bold text-gray-800 mb-4">動画サイトの技術スタックについて</h2><br>
+            <p class="text-gray-700 mb-4">このサイトもそうですがすべてAWSで完結している状態です。定番のstaticなサイトはS3+CloudFrontみたいな構成だと思うのですが今回はそうしてません。流石にドメインをとるのは維持費的に無理でしたが、URLに何らかのワードを入れたほうが怪しくないだろうと思ってCloudFrontを使わずにS3バケットを直接公開しています。<br>APIサーバーには安定のLambda、データベースにはDynamoDB、動画自体はサイトとは別バケットのS3に入っています。データベースはすべて僕が手打ちで作りました...</p>
+
+            <br><h2 class="text-3xl font-bold text-gray-800 mb-4">セキュリティとストリーミング動画配信</h2><br>
+
+            <p class="text-gray-700 mb-4">一般的な動画配信サイトではDRMのような保護やAESによる暗号化を行っているのですが、今回は行っていません。<br>理由としては余りにコストが重すぎるのとパフォーマンス的な問題が出るためです。</p>
+            <p class="text-gray-700 mb-4">動画の配信自体はHTTP Live Streamingと言うプロトコルを使い配信しています。今回の動画は25分/nGBとかなり大きいファイルで、30秒程度であればそのままmp4ファイルで配信してもよかったのですが流石に厳しいのでこのような対応を取りました。</p>
+            <p class="text-gray-700 mb-4">HLSは拡張子が.m3u8というインデックスファイルと.tsというセグメントファイルに分割されます。公開状態のS3に保存されているm3u8ファイルであればhls.js等を利用してリンクを指定すれば一発で再生できるのですが、それをやるとDDoSを食らう可能性があります。
+                <br>その為非公開のS3に対してLambdaで署名付きURLを発行している状態です。
+            </p>
+            <p class="text-gray-700 mb-4">しかし署名の発行はファイルに対してではなく各オブジェクトごとにしか行えない為、m3u8ファイルに書かれている各セグメントファイルの指定を署名付きURLのものに書き換えてクライアントに返しています</p>
+
+            <br><h2 class="text-3xl font-bold text-gray-800 mb-4">それではまた、お元気で。</h2><br>
+
+            
+
+
+            <div class="mb-4">
+                <span class="tag">ポエム</span>
+            </div>
+        </article>
+
+
+
+        <div class="share-buttons">
+            <div class="share-button" onclick="shareOnTwitter()">
+                <i class="fab fa-twitter"></i>
+                <span>ツイート</span>
+            </div>
+            <div class="share-button" onclick="shareOnFacebook()">
+                <i class="fab fa-facebook-f"></i>
+                <span>シェア</span>
+            </div>
+        </div>
+        <div class="share-buttons">
+            <!-- existing share buttons -->
+            <div class="home-button" onclick="location.href='https://mtm9-graduation-web.s3.amazonaws.com/index.html'">
+                <i class="fas fa-home"></i>
+                <span>ホーム</span>
+            </div>
+        </div>
+        <footer class="text-center text-gray-600 mt-12">
+            <p>&copy; 2023~2024 Ryo Sato. All rights reserved.</p>
+        </footer>
+    </div>
+    <script>
+        function copyToClipboard(button) {
+            var code = button.previousElementSibling.innerText;
+            var textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            button.textContent = 'コピーしました！';
+            setTimeout(function() {
+                button.textContent = 'コピー';
+            }, 2000);
+        }
+
+        function shareOnTwitter() {
+            var url = encodeURIComponent(document.location.href);
+            var text = encodeURIComponent(document.title);
+            var twitterUrl = "https://twitter.com/intent/tweet?url=" + url + "&text=" + text;
+            window.open(twitterUrl, '_blank');
+        }
+
+        function shareOnFacebook() {
+            var url = encodeURIComponent(document.location.href);
+            var facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=" + url;
+            window.open(facebookUrl, '_blank');
+        }
+
+        
+function goHome() {
+    window.location.href = 'your-homepage-url'; 
+}
+
+    </script>
+</body>
+</html>
